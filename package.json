@@ -1,0 +1,39 @@
+{
+  "name": "vue-stripe-js",
+  "version": "1.0.0",
+  "description": "Stripe Elements & Checkout for Vue 3",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/vue-stripe.umd.js",
+  "module": "./dist/vue-stripe.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-stripe.es.js",
+      "require": "./dist/vue-stripe.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vuedx-typecheck . && vite build"
+  },
+  "devDependencies": {
+    "@stripe/stripe-js": "^1.21.1",
+    "@types/node": "^16.11.6",
+    "@types/stripe": "^8.0.417",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
+    "@vitejs/plugin-vue": "^1.0.4",
+    "@vue/compiler-sfc": "^3.0.5",
+    "@vuedx/typecheck": "^0.7.4",
+    "@vuedx/typescript-plugin-vue": "^0.7.4",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "prettier": "^2.3.0",
+    "typescript": "^4.1.3",
+    "vite": "^2.2.4",
+    "vue": "^3.2.21"
+  }
+}
