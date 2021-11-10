@@ -7,7 +7,7 @@ import type { StripeElementType } from '@stripe/stripe-js'
 import type {
   StripeElementsWithoutOverload,
   StripeElementOptions,
-} from '../../types/main'
+} from '../../types/vue-stripe'
 
 import { createElement } from '../stripe-elements'
 import { defineComponent, ref, onMounted, onBeforeUnmount, watch } from 'vue'

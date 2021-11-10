@@ -9,7 +9,7 @@ import type {
 import type {
   StripeElementsWithoutOverload,
   StripeElementOptions,
-} from '../types/main'
+} from '../types/vue-stripe'
 
 const ERRORS = {
   STRIPE_NOT_LOADED: 'Stripe v3 library is not loaded',
