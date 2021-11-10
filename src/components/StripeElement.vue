@@ -3,7 +3,12 @@
 </template>
 
 <script lang="ts">
-import { StripeElementType, StripeElements } from '@stripe/stripe-js/types'
+import type { StripeElementType } from '@stripe/stripe-js'
+import type {
+  StripeElementsWithoutOverload,
+  StripeElementOptions,
+} from '../../types/main'
+
 import { createElement } from '../stripe-elements'
 import { defineComponent, ref, onMounted, onBeforeUnmount, watch } from 'vue'
 
@@ -14,7 +19,7 @@ export default defineComponent({
     // elements object
     // https://stripe.com/docs/js/elements_object/create
     elements: {
-      type: Object as () => StripeElements,
+      type: Object as () => StripeElementsWithoutOverload,
       required: true,
     },
     // type of the element
@@ -26,7 +31,7 @@ export default defineComponent({
     // element options
     // https://stripe.com/docs/js/elements_object/create_element?type=card#elements_create-options
     options: {
-      type: Object,
+      type: Object as () => StripeElementOptions,
       default: () => ({}),
     },
   },

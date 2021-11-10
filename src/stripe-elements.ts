@@ -1,3 +1,16 @@
+import type {
+  Stripe,
+  StripeConstructorOptions,
+  StripeElementsOptions,
+  StripeElements,
+  StripeElementType,
+} from '@stripe/stripe-js'
+
+import type {
+  StripeElementsWithoutOverload,
+  StripeElementOptions,
+} from '../types/main'
+
 const ERRORS = {
   STRIPE_NOT_LOADED: 'Stripe v3 library is not loaded',
   INSTANCE_NOT_DEFINED:
@@ -8,27 +21,18 @@ const ERRORS = {
     "elementType is required. You can't create stripe element without it",
 }
 
-import {
-  Stripe,
-  StripeConstructorOptions,
-  StripeElementsOptions,
-  StripeElement,
-  StripeElementType,
-  StripeElements,
-} from '@stripe/stripe-js/types'
-
-export const initStripe = (key: string, options: StripeConstructorOptions) => {
+export const initStripe = (key: string, options?: StripeConstructorOptions) => {
   if (!window.Stripe) {
     return console.error(ERRORS.STRIPE_NOT_LOADED)
   }
 
-  const stripeInstance = window.Stripe(key, options)
+  const stripeInstance: Stripe = window.Stripe(key, options)
   return stripeInstance
 }
 
 export const createElements = (
   instance: Stripe,
-  options: StripeElementsOptions | undefined
+  options?: StripeElementsOptions
 ) => {
   if (!instance) {
     return console.error(ERRORS.INSTANCE_NOT_DEFINED)
@@ -39,9 +43,9 @@ export const createElements = (
 }
 
 export const createElement = (
-  elements: any,
+  elements: StripeElementsWithoutOverload,
   elementType: StripeElementType,
-  options: object | undefined
+  options?: StripeElementOptions
 ) => {
   if (!elements) {
     return console.error(ERRORS.ELEMENTS_NOT_DEFINED)
@@ -50,6 +54,6 @@ export const createElement = (
     return console.error(ERRORS.ELEMENT_TYPE_NOT_DEFINED)
   }
 
-  const element: StripeElement = elements.create(elementType, options)
+  const element = elements.create(elementType, options)
   return element
 }
