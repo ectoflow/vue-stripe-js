@@ -47,7 +47,7 @@ export default defineComponent({
 
 Create card
 
-```ts
+```vue
 <template>
   <StripeElements
     v-if="stripeLoaded"
@@ -136,7 +136,7 @@ export default defineComponent({
 
 Create multiple elements
 
-```html
+```vue
 <StripeElements
   v-slot="{ elements }"
   :stripe-key="stripeKey"
@@ -160,7 +160,7 @@ Create multiple elements
 
 You can even create multiple groups, don't ask me why. It's possible.
 
-```html
+```vue
 <StripeElements
   v-slot="{ elements }"
   :stripe-key="stripeKey1"
@@ -238,9 +238,9 @@ You can access `instance` and `elements` by adding ref to StripeElements compone
 
 Elegant solution for props. Really handy because you can make stripe `instance` and `elements` objects available to all children without adding extra code.
 
-```html
+```vue
 <!-- Cool, isn't it? -->
-<StripeElements v-slot="{elements, instance}">
+<StripeElements v-slot="{ elements, instance }">
   <StripeElement :elements="elements" />
   <CustomComponent :instance="instance" />
 </StripeElements>
