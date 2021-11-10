@@ -1,10 +1,7 @@
 {
   "name": "vue-stripe-js",
   "version": "1.0.0",
-  "description": "Stripe Elements & Checkout for Vue 3",
-  "files": [
-    "dist"
-  ],
+  "description": "Vue 3 components for Stripe.js: Elements & Checkout",
   "main": "./dist/vue-stripe.umd.js",
   "module": "./dist/vue-stripe.es.js",
   "exports": {
@@ -12,6 +9,29 @@
       "import": "./dist/vue-stripe.es.js",
       "require": "./dist/vue-stripe.umd.js"
     }
+  },
+  "types": "./types/vue-stripe.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ectoflow/vue-stripe-js.git"
+  },
+  "keywords": [
+    "Vue",
+    "Stripe",
+    "Elements",
+    "Checkout",
+    "Payment",
+    "Components"
+  ],
+  "author": "Oleksandr Bystrikov",
+  "license": "MIT",
+  "homepage": "https://github.com/ectoflow/vue-stripe-js",
+  "bugs": {
+    "url": "https://github.com/ectoflow/vue-stripe-js/issues"
   },
   "scripts": {
     "dev": "vite",
