@@ -57,18 +57,18 @@ declare module 'vue-stripe-js' {
   export const initStripe: (
     key: string,
     options: StripeConstructorOptions
-  ) => void | Stripe
+  ) => unknown | Stripe
 
   export const createElements: (
     instance: Stripe,
     options?: StripeElementsOptions
-  ) => void | StripeElements
+  ) => unknown | StripeElements
 
   export const createElement: (
     elements: StripeElements,
     elementType: StripeElementType,
     options?: StripeElementOptions
-  ) => void | StripeElement
+  ) => unknown | StripeElement
 
   export const StripeElements: Component
   export const StripeElement: Component
