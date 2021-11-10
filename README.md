@@ -51,13 +51,17 @@ Create card
 <template>
   <StripeElements
     v-if="stripeLoaded"
-    v-slot="{ elements, instance }" // attention: important part
+    v-slot="{ elements, instance }" // attention: important part!
     ref="elms"
     :stripe-key="stripeKey"
     :instance-options="instanceOptions"
     :elements-options="elementsOptions"
   >
-    <StripeElement ref="card" :elements="elements" :options="cardOptions" />
+    <StripeElement
+      ref="card"
+      :elements="elements"
+      :options="cardOptions"
+    />
   </StripeElements>
   <button type="button" @click="pay">Pay</button>
 </template>
