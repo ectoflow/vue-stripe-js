@@ -53,23 +53,21 @@ export type StripeElementsWithoutOverload = {
   update: (options: StripeElementsUpdateOptions) => void
 }
 
-declare module 'vue-stripe-js' {
-  export const initStripe: (
-    key: string,
-    options: StripeConstructorOptions
-  ) => unknown | Stripe
+export const initStripe: (
+  key: string,
+  options: StripeConstructorOptions
+) => unknown | Stripe
 
-  export const createElements: (
-    instance: Stripe,
-    options?: StripeElementsOptions
-  ) => unknown | StripeElements
+export const createElements: (
+  instance: Stripe,
+  options?: StripeElementsOptions
+) => unknown | StripeElements
 
-  export const createElement: (
-    elements: StripeElements,
-    elementType: StripeElementType,
-    options?: StripeElementOptions
-  ) => unknown | StripeElement
+export const createElement: (
+  elements: StripeElements,
+  elementType: StripeElementType,
+  options?: StripeElementOptions
+) => unknown | StripeElement
 
-  export const StripeElements: Component
-  export const StripeElement: Component
-}
+export const StripeElements: Component
+export const StripeElement: Component
