@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, onMounted, watch } from 'vue'
+import { defineComponent, computed, ref, toRefs, onMounted, watch } from 'vue'
 import { createElements, initStripe } from '../stripe-elements'
 
 export default defineComponent({
@@ -27,6 +27,7 @@ export default defineComponent({
   },
 
   setup(props) {
+    const { stripeKey, instanceOptions, elementsOptions } = toRefs(props)
     const instance = ref()
     const elements = ref()
     const elementsUsable = computed(() => {
@@ -34,13 +35,12 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      const { stripeKey, instanceOptions, elementsOptions } = props
-      instance.value = initStripe(stripeKey, instanceOptions)
-      elements.value = createElements(instance.value, elementsOptions)
+      instance.value = initStripe(stripeKey.value, instanceOptions.value)
+      elements.value = createElements(instance.value, elementsOptions.value)
     })
 
-    watch(props.elementsOptions, () => {
-      elements.value?.update(props.elementsOptions)
+    watch(elementsOptions, () => {
+      elements.value?.update(elementsOptions.value)
     })
 
     return {

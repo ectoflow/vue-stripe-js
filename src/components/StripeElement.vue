@@ -10,7 +10,14 @@ import type {
 } from '../../types/vue-stripe'
 
 import { createElement } from '../stripe-elements'
-import { defineComponent, ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import {
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  toRefs,
+  watch,
+} from 'vue'
 
 export default defineComponent({
   name: 'StripeElement',
@@ -40,11 +47,15 @@ export default defineComponent({
     const domElement = ref(document.createElement('div'))
     const stripeElement = ref()
     const mountPoint = ref()
+    const { elements, type, options } = toRefs(props)
 
     onMounted(() => {
       const mountElement = () => {
-        const { elements, type, options } = props
-        stripeElement.value = createElement(elements, type, options)
+        stripeElement.value = createElement(
+          elements.value,
+          type.value,
+          options.value
+        )
         stripeElement.value.mount(domElement.value)
         mountPoint.value.appendChild(domElement.value)
       }
@@ -82,7 +93,7 @@ export default defineComponent({
       stripeElement.value?.destroy()
     })
 
-    watch(props.options, () => {
+    watch(options, () => {
       stripeElement.value?.update(props.options)
     })
 
