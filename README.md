@@ -104,6 +104,17 @@ export default defineComponent({
       })
     })
 
+    const = pay () => {
+      // Get stripe element
+      const cardElement = card.stripeElement
+
+      // Access instance methods, e.g. createToken()
+      elms.instance.createToken(cardElement).then((result: object) => {
+        // Handle result.error or result.token
+        console.log(result)
+      })
+    },
+
     return {
       stripeKey,
       stripeLoaded,
@@ -112,20 +123,8 @@ export default defineComponent({
       cardOptions,
       card,
       elms,
+      pay
     }
-  },
-
-  methods: {
-    pay() {
-      // Get stripe element
-      const cardElement = this.card.stripeElement
-
-      // Access instance methods, e.g. createToken()
-      this.elms.instance.createToken(cardElement).then((result: object) => {
-        // Handle result.error or result.token
-        console.log(result)
-      })
-    },
   },
 })
 </script>
