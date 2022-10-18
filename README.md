@@ -1,3 +1,5 @@
+[![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine)
+
 # Vue Stripe.js
 
 Flexible and powerful Vue 3 components for Stripe. It's a glue between [Stripe.js](https://stripe.com/docs/js) and Vue component lifecycle.
