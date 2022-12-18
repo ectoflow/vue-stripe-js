@@ -106,7 +106,7 @@ export default defineComponent({
       })
     })
 
-    const = pay () => {
+    const pay = () => {
       // Get stripe element
       const cardElement = card.stripeElement
 
