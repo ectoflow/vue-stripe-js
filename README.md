@@ -108,10 +108,10 @@ export default defineComponent({
 
     const pay = () => {
       // Get stripe element
-      const cardElement = card.stripeElement
+      const cardElement = card.value.stripeElement
 
       // Access instance methods, e.g. createToken()
-      elms.instance.createToken(cardElement).then((result: object) => {
+      elms.value.instance.createToken(cardElement).then((result: object) => {
         // Handle result.error or result.token
         console.log(result)
       })
