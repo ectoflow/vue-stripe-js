@@ -12,7 +12,8 @@
   },
   "types": "./types/vue-stripe.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "repository": {
     "type": "git",
