@@ -7,7 +7,8 @@
   "exports": {
     ".": {
       "import": "./dist/vue-stripe.es.js",
-      "require": "./dist/vue-stripe.umd.js"
+      "require": "./dist/vue-stripe.umd.js",
+      "types": "./types/vue-stripe.d.ts"
     }
   },
   "types": "./types/vue-stripe.d.ts",
