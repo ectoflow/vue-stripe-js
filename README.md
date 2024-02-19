@@ -4,22 +4,26 @@
 
 Flexible and powerful Vue 3 components for Stripe. It's a glue between [Stripe.js](https://stripe.com/docs/js) and Vue component lifecycle.
 
-- Vue 3: stable ✅
-- Vue 2: use [vue-stripe-elements](https://github.com/ectoflow/vue-stripe-elements)
-
 # Quickstart
 
-### 1. Install package:
+### 1. Install
 
+**npm**
 ```bash
-# npm
-npm i vue-stripe-js --save-dev
-
-# yarn
-yarn add vue-stripe-js --dev
+npm i vue-stripe-js @stripe/stripe-js --save-dev
 ```
 
-### 2. Load Stripe.js library:
+**yarn**
+```bash
+yarn add vue-stripe-js @stripe/stripe-js --dev
+```
+
+**pnpm**
+```bash
+pnpm add vue-stripe-js @stripe/stripe-js --save-dev
+```
+
+### 2. Load Stripe.js
 
 ```ts
 import { loadStripe } from '@stripe/stripe-js'
@@ -115,7 +119,7 @@ export default defineComponent({
         // Handle result.error or result.token
         console.log(result)
       })
-    },
+    }
 
     return {
       stripeKey,
@@ -127,13 +131,12 @@ export default defineComponent({
       elms,
       pay
     }
-  },
+  }
 })
 </script>
-
 ```
 
-### 4. Get advanced
+### 4. Use multiple components
 
 Create multiple elements
 
@@ -157,9 +160,9 @@ Create multiple elements
 </StripeElements>
 ```
 
-### 5. Get wild flexible
+### 5. Be super flexible
 
-You can even create multiple groups, don't ask me why. It's possible.
+You can even create multiple groups.
 
 ```vue
 <StripeElements
@@ -301,17 +304,11 @@ setup() {
       postalCode: '12345'
     }
   })
-  return {
-    elementOptions,
+  
+  const changePostalCode = (postalCode) => {
+    elementOptions.value.postalCode = postalCode
   }
 },
-
-methods: {
-  changePostalCode() {
-    // will update stripe element automatically
-    this.elementOptions.value.postalCode = '54321'
-  }
-}
 ```
 
 ### events
