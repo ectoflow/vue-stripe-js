@@ -56,8 +56,8 @@ export default defineComponent({
           type.value,
           options.value
         )
-        stripeElement.value.mount(domElement.value)
         mountPoint.value.appendChild(domElement.value)
+        stripeElement.value.mount(domElement.value)
       }
 
       // Handle event listeners
