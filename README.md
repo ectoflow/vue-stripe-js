@@ -10,17 +10,17 @@ Flexible and powerful Vue 3 components for Stripe. It's a glue between [Stripe.j
 
 **npm**
 ```bash
-npm i vue-stripe-js @stripe/stripe-js --save-dev
+npm i vue-stripe-js @stripe/stripe-js
 ```
 
 **yarn**
 ```bash
-yarn add vue-stripe-js @stripe/stripe-js --dev
+yarn add vue-stripe-js @stripe/stripe-js
 ```
 
 **pnpm**
 ```bash
-pnpm add vue-stripe-js @stripe/stripe-js --save-dev
+pnpm add vue-stripe-js @stripe/stripe-js
 ```
 
 ### 2. Load Stripe.js
