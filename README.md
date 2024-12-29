@@ -2,6 +2,11 @@
 
 # Vue Stripe.js
 
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ectoflow/vue-stripe-js/ci.yml?branch=main)](https://github.com/ectoflow/vue-stripe-js/actions)
+[![npm](https://img.shields.io/npm/v/vue-stripe-js)](https://www.npmjs.com/package/vue-stripe-js)
+[![Bundle Size](https://img.shields.io/bundlephobia/min/vue-stripe-js)](https://bundlephobia.com/result?p=vue-stripe-js)
+[![npm](https://img.shields.io/npm/dm/vue-stripe-js)](https://www.npmjs.com/package/vue-stripe-js)
+
 Flexible and powerful Vue 3 components for Stripe. It's a glue between
 [Stripe.js](https://stripe.com/docs/js) and Vue component lifecycle.
 
