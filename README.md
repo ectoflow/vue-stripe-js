@@ -2,23 +2,27 @@
 
 # Vue Stripe.js
 
-Flexible and powerful Vue 3 components for Stripe. It's a glue between [Stripe.js](https://stripe.com/docs/js) and Vue component lifecycle.
+Flexible and powerful Vue 3 components for Stripe. It's a glue between
+[Stripe.js](https://stripe.com/docs/js) and Vue component lifecycle.
 
 # Quickstart
 
 ### 1. Install
 
 **npm**
+
 ```bash
 npm i vue-stripe-js @stripe/stripe-js
 ```
 
 **yarn**
+
 ```bash
 yarn add vue-stripe-js @stripe/stripe-js
 ```
 
 **pnpm**
+
 ```bash
 pnpm add vue-stripe-js @stripe/stripe-js
 ```
@@ -26,15 +30,15 @@ pnpm add vue-stripe-js @stripe/stripe-js
 ### 2. Load Stripe.js
 
 ```ts
-import { loadStripe } from '@stripe/stripe-js'
-import { defineComponent, ref, onBeforeMount } from 'vue'
+import { loadStripe } from "@stripe/stripe-js"
+import { defineComponent, onBeforeMount, ref } from "vue"
 
 export default defineComponent({
   // ...
   setup() {
     onBeforeMount(() => {
       const stripeLoaded = ref(false)
-      const stripePromise = loadStripe('your_key')
+      const stripePromise = loadStripe("your_key")
       stripePromise.then(() => {
         stripeLoaded.value = true
       })
@@ -43,15 +47,14 @@ export default defineComponent({
 })
 ```
 
-> Alternatively, you can load Stripe library by including script tag. Just make sure it's ready before your stripe components mount.
+> Alternatively, you can load Stripe library by including script tag. Just make
+> sure it's ready before your stripe components mount.
 
 ```
 <script src="https://js.stripe.com/v3/"></script>
 ```
 
-### 3. Use built-in components
-
-Create card
+### 3. Card payment (default)
 
 ```vue
 <template>
@@ -136,9 +139,39 @@ export default defineComponent({
 </script>
 ```
 
-### 4. Use multiple components
+### 4. Payment element (requires backend)
 
-Create multiple elements
+1. Add server code by following
+   [stripe guide](https://docs.stripe.com/payments/quickstart?lang=node)
+1. Grab `clientSecret` from the payment intent
+1. Pass it to `elements-options`
+
+```vue
+<template>
+  <StripeElements
+    ...
+    :elements-options="elementsOptions"
+  >
+    <StripeElement
+      type="payment"
+      ...
+    />
+  </StripeElements>
+<template />
+```
+
+```ts
+const elementsOptions = ref({
+  clientSecret: "grab_it_from_payment_intent",
+  // https://stripe.com/docs/js/elements_object/create#stripe_elements-options
+})
+```
+
+#### It works!
+
+<img width="840" alt="image" src="https://github.com/user-attachments/assets/0619f7b5-a70f-48a1-84c4-c75bf9fc6ded" />
+
+### 5. Use elements like lego
 
 ```vue
 <StripeElements
@@ -160,29 +193,6 @@ Create multiple elements
 </StripeElements>
 ```
 
-### 5. Be super flexible
-
-You can even create multiple groups.
-
-```vue
-<StripeElements
-  v-slot="{ elements }"
-  :stripe-key="stripeKey1"
-  :instance-options="instanceOptions1"
-  :elements-options="elementsOptions1"
->
-  <StripeElement :elements="elements" :options="cardOptions" />
-</StripeElements>
-<StripeElements
-  v-slot="{ elements }"
-  :stripe-key="stripeKey2"
-  :instance-options="instanceOptions2"
-  :elements-options="elementsOptions2"
->
-  <StripeElement type="iban" :elements="elements" :options="ibanOptions" />
-</StripeElements>
-```
-
 # Types
 
 ```ts
@@ -199,10 +209,11 @@ import types {
 
 ## StripeElements.vue
 
-Think of it as of individual group of elements. It creates stripe instance and elements object.
+Think of it as of individual group of elements. It creates stripe instance and
+elements object.
 
 ```js
-import { StripeElements } from 'vue-stripe-js'
+import { StripeElements } from "vue-stripe-js"
 ```
 
 ### props
@@ -227,7 +238,8 @@ elementsOptions: {
 
 ### data
 
-You can access `instance` and `elements` by adding ref to StripeElements component.
+You can access `instance` and `elements` by adding ref to StripeElements
+component.
 
 ```js
 // StripeElements.vue exposes
@@ -240,7 +252,8 @@ You can access `instance` and `elements` by adding ref to StripeElements compone
 
 ### default scoped slot
 
-Elegant solution for props. Really handy because you can make stripe `instance` and `elements` objects available to all children without adding extra code.
+Elegant solution for props. Really handy because you can make stripe `instance`
+and `elements` objects available to all children without adding extra code.
 
 ```vue
 <!-- Cool, isn't it? -->
@@ -255,7 +268,7 @@ Elegant solution for props. Really handy because you can make stripe `instance` 
 Universal and type agnostic component. Create any element supported by Stripe.
 
 ```js
-import { StripeElement } from 'vue-stripe-js'
+import { StripeElement } from "vue-stripe-js"
 ```
 
 ### props
@@ -295,7 +308,8 @@ import { StripeElement } from 'vue-stripe-js'
 
 ### options
 
-Element options are reactive. Recommendation: don't use v-model on `StripeElement`, instead pass value via options.
+Element options are reactive. Recommendation: don't use v-model on
+`StripeElement`, instead pass value via options.
 
 ```js
 setup() {
@@ -328,4 +342,5 @@ Following events are emitted on StripeElement
 
 # Styles
 
-No base style included. Main reason: overriding it isn't fun. Style as you wish via element options: [see details](https://stripe.com/docs/js/appendix/style).
+No base style included. Main reason: overriding it isn't fun. Style as you wish
+via element options: [see details](https://stripe.com/docs/js/appendix/style).
