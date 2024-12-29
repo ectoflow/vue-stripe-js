@@ -5,14 +5,12 @@
     }
   ],
   "settings": {
-    // Vue
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "denoland.vscode-deno",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": false,
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
-    },
-    "eslint.alwaysShowStatus": true,
-    "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"]
+    "editor.rulers": [
+      80
+    ],
+    "editor.wordWrap": "on",
   }
 }
