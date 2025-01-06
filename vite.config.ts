@@ -1,12 +1,14 @@
-import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
+import { defineConfig } from "vite"
+import dts from "vite-plugin-dts"
 
 export default defineConfig({
   build: {
     lib: {
       name: "vue-stripe-js",
-      entry: "src/main.ts",
-      fileName: (format) => `vue-stripe.${format}.js`,
+      fileName: "vue-stripe",
+      formats: ["es", "umd", "cjs"],
+      entry: ["src/main.ts"],
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
@@ -21,5 +23,11 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    dts({
+      tsconfigPath: "./tsconfig.app.json",
+      rollupTypes: true,
+    }),
+  ],
 })
