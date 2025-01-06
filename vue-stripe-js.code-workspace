@@ -5,12 +5,21 @@
     }
   ],
   "settings": {
-    "editor.defaultFormatter": "denoland.vscode-deno",
+    "editor.defaultFormatter": "biomejs.biome",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": false,
-    "editor.rulers": [
-      80
-    ],
+    "editor.rulers": [80],
     "editor.wordWrap": "on",
+    "[typescript]": {
+      "editor.defaultFormatter": "biomejs.biome"
+    },
+    "html.format.wrapAttributes": "force-expand-multiline",
+    "vue.server.hybridMode": "auto",
+    "[vue]": {
+      "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "biomejs.biome"
+    }
   }
 }
