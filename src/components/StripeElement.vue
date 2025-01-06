@@ -2,106 +2,95 @@
   <div ref="mountPoint"></div>
 </template>
 
-<script lang="ts">
-import type { StripeElementType } from '@stripe/stripe-js'
-import type {
-  StripeElementsWithoutOverload,
-  StripeElementOptions,
-} from '../../types/vue-stripe'
-
-import { createElement } from '../stripe-elements'
+<script setup lang="ts">
+import type { StripeElementType, StripeElements } from "@stripe/stripe-js"
 import {
-  defineComponent,
+  defineEmits,
+  inject,
   onBeforeUnmount,
   onMounted,
   ref,
   toRefs,
   watch,
-} from 'vue'
+  withDefaults,
+} from "vue"
+import { createElement } from "../stripe-elements"
+import type { StripeElementOptions } from "../stripe-elements"
 
-export default defineComponent({
-  name: 'StripeElement',
+interface Props {
+  type?: StripeElementType
+  elements?: StripeElements
+  options?: StripeElementOptions
+}
 
-  props: {
-    // elements object
-    // https://stripe.com/docs/js/elements_object/create
-    elements: {
-      type: Object as () => StripeElementsWithoutOverload,
-      required: true,
-    },
-    // type of the element
-    // https://stripe.com/docs/js/elements_object/create_element?type=card
-    type: {
-      type: String as () => StripeElementType,
-      default: () => 'card',
-    },
-    // element options
-    // https://stripe.com/docs/js/elements_object/create_element?type=card#elements_create-options
-    options: {
-      type: Object as () => StripeElementOptions,
-      default: () => ({}),
-    },
-  },
+const props = withDefaults(defineProps<Props>(), {
+  type: () =>
+    (inject("providedElements") as StripeElementType) ? "payment" : "card",
+  elements: () => inject("providedElements") as StripeElements,
+})
+const { type, elements, options } = toRefs(props)
 
-  setup(props, { emit }) {
-    const domElement = ref(document.createElement('div'))
-    const stripeElement = ref()
-    const mountPoint = ref()
-    const { elements, type, options } = toRefs(props)
+// TODO: verify it works
+const emit = defineEmits()
 
-    onMounted(() => {
-      const mountElement = () => {
-        stripeElement.value = createElement(
-          elements.value,
-          type.value,
-          options.value
-        )
-        mountPoint.value.appendChild(domElement.value)
-        stripeElement.value.mount(domElement.value)
-      }
+const domElement = ref(document.createElement("div"))
+const stripeElement = ref()
+const mountPoint = ref()
 
-      // Handle event listeners
-      const wrapperFn = (t: string, e: Event) => {
-        emit(t, e)
-      }
+onMounted(() => {
+  const mountElement = () => {
+    stripeElement.value = createElement(
+      elements.value,
+      type.value,
+      options.value,
+    )
+    mountPoint.value.appendChild(domElement.value)
+    stripeElement.value?.mount(domElement.value)
+  }
 
-      const handleEvents = () => {
-        // See stripe element events: https://stripe.com/docs/js/element/events
-        const eventTypes = [
-          'change',
-          'ready',
-          'focus',
-          'blur',
-          'click',
-          'escape',
-        ]
-        eventTypes.forEach((t) => {
-          stripeElement.value.on(t, wrapperFn.bind(null, t))
-        })
-      }
+  // Handle event listeners
+  const wrapperFn = (t: string, e: Event) => {
+    emit(t, e)
+  }
 
-      try {
-        mountElement()
-        handleEvents()
-      } catch (error) {
-        console.error(error)
-      }
-    })
+  const handleEvents = () => {
+    // See stripe element events: https://stripe.com/docs/js/element/events
+    const eventTypes = [
+      "change",
+      "ready",
+      "focus",
+      "blur",
+      "click",
+      "escape",
+      "loaderror",
+      "loaderstart",
+    ]
 
-    onBeforeUnmount(() => {
-      stripeElement.value?.unmount()
-      stripeElement.value?.destroy()
-    })
-
-    watch(options, () => {
-      stripeElement.value?.update(props.options)
-    })
-
-    return {
-      stripeElement,
-      domElement,
-      mountPoint,
+    for (const eventType of eventTypes) {
+      stripeElement.value?.on(eventType, wrapperFn.bind(null, eventType))
     }
-  },
+  }
+
+  try {
+    mountElement()
+    handleEvents()
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+onBeforeUnmount(() => {
+  stripeElement.value?.unmount()
+  stripeElement.value?.destroy()
+})
+
+watch(options, () => {
+  stripeElement.value?.update(props.options)
+})
+
+defineExpose({
+  stripeElement,
+  domElement,
+  mountPoint,
 })
 </script>
