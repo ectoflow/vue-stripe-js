@@ -1,53 +1,51 @@
 <template>
   <div v-if="elementsUsable">
-    <slot :instance="instance" :elements="elements"></slot>
+    <slot
+      :instance="instance"
+      :elements="elements"
+    ></slot>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, ref, toRefs, onMounted, watch } from 'vue'
-import { createElements, initStripe } from '../stripe-elements'
+<script setup lang="ts">
+import type {
+  Stripe,
+  StripeConstructorOptions,
+  StripeElements,
+  StripeElementsOptions,
+  StripeElementsUpdateOptions,
+} from "@stripe/stripe-js"
+import { computed, onMounted, provide, ref, toRefs, watch } from "vue"
+import { createElements, initStripe } from "../stripe-elements.ts"
 
-export default defineComponent({
-  name: 'StripeElements',
+const props = defineProps<{
+  stripeKey: string
+  instanceOptions?: StripeConstructorOptions
+  elementsOptions?: StripeElementsOptions
+}>()
 
-  props: {
-    stripeKey: {
-      type: String,
-      required: true,
-    },
-    instanceOptions: {
-      type: Object,
-      default: () => ({}),
-    },
-    elementsOptions: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
+const { stripeKey, instanceOptions, elementsOptions } = toRefs(props)
+const instance = ref<Stripe>()
+const elements = ref<StripeElements>()
+const elementsUsable = computed(() => {
+  return elements.value ? Object.keys(elements.value).length > 0 : false
+})
 
-  setup(props) {
-    const { stripeKey, instanceOptions, elementsOptions } = toRefs(props)
-    const instance = ref()
-    const elements = ref()
-    const elementsUsable = computed(() => {
-      return elements.value ? Object.keys(elements.value).length > 0 : false
-    })
+onMounted(() => {
+  instance.value = initStripe(stripeKey.value, instanceOptions.value)
+  elements.value = createElements(instance.value, elementsOptions.value)
+})
 
-    onMounted(() => {
-      instance.value = initStripe(stripeKey.value, instanceOptions.value)
-      elements.value = createElements(instance.value, elementsOptions.value)
-    })
+watch(elementsOptions, () => {
+  elements.value?.update(elementsOptions.value as StripeElementsUpdateOptions)
+})
 
-    watch(elementsOptions, () => {
-      elements.value?.update(elementsOptions.value)
-    })
+provide("providedInstance", instance)
+provide("providedElements", elements)
 
-    return {
-      elements,
-      instance,
-      elementsUsable,
-    }
-  },
+defineExpose({
+  elements,
+  instance,
+  elementsUsable,
 })
 </script>
