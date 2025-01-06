@@ -1,5 +1,5 @@
-import { createApp } from 'vue'
-import CardOnly from './CardOnly.vue'
+import { createApp } from "vue"
+import DemoApp from "./DemoApp.vue"
 
-const app = createApp(CardOnly)
-app.mount('#app')
+const app = createApp(DemoApp)
+app.mount("#app")
