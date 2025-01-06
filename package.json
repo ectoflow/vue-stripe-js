@@ -1,6 +1,6 @@
 {
   "name": "vue-stripe-js",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "Vue 3 components for Stripe.js: Elements & Checkout",
   "type": "module",
   "main": "./dist/vue-stripe.js",
