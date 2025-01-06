@@ -1,25 +1,33 @@
 <template>
   <StripeElements
     v-if="stripeLoaded"
-    v-slot="{ elements }"
-    ref="elms"
     :stripe-key="stripeKey"
     :instance-options="instanceOptions"
     :elements-options="elementsOptions"
+    ref="elms"
   >
-    <StripeElement ref="card" :elements="elements" :options="cardOptions" />
+    <StripeElement
+      type="card"
+      :options="cardOptions"
+      ref="card"
+    />
   </StripeElements>
-  <button type="button" @click="pay">Pay</button>
+  <button
+    type="button"
+    @click="pay"
+  >
+    Pay
+  </button>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onBeforeMount } from 'vue'
-import { loadStripe } from '@stripe/stripe-js'
-import StripeElements from '../src/components/StripeElements.vue'
-import StripeElement from '../src/components/StripeElement.vue'
+import { loadStripe } from "@stripe/stripe-js"
+import { defineComponent, onBeforeMount, ref } from "vue"
+import StripeElement from "../src/components/StripeElement.vue"
+import StripeElements from "../src/components/StripeElements.vue"
 
 export default defineComponent({
-  name: 'CardOnly',
+  name: "CardElement",
 
   components: {
     StripeElements,
@@ -27,7 +35,7 @@ export default defineComponent({
   },
 
   setup() {
-    const stripeKey = ref('pk_test_TYooMQauvdEDq54NiTphI7jx') // test key
+    const stripeKey = ref("pk_test_TYooMQauvdEDq54NiTphI7jx") // test key
     const instanceOptions = ref({
       // https://stripe.com/docs/js/initializing#init_stripe_js-options
     })
@@ -37,7 +45,7 @@ export default defineComponent({
     const cardOptions = ref({
       // https://stripe.com/docs/stripe.js#element-options
       value: {
-        postalCode: '12345',
+        postalCode: "12345",
       },
     })
     const stripeLoaded = ref(false)
@@ -64,10 +72,16 @@ export default defineComponent({
 
   methods: {
     pay() {
+      /* 
+        WARNING:
+        legacy way to implement card payments,
+        for modern card example, see CardElement.vue
+      */
+
       // Get stripe element
       const cardElement = this.card.stripeElement
 
-      // Access instance methods, e.g. createToken()
+      // "instance" means Stripe Instance or Stripe object
       this.elms.instance.createToken(cardElement).then((result: object) => {
         // Handle result.error or result.token
         console.log(result)
