@@ -1,10 +1,12 @@
 <template>
   <div>
-    <h1>vue-stripe-js demo</h1>
+    <h1>Demo: Vue Stripe.js</h1>
 
     <section>
       <h2>Payment Element</h2>
-      <p>Deferred flow - add guide link</p>
+      <p>Deferred flow - 
+        <a href="https://docs.stripe.com/payments/accept-a-payment-deferred?type=payment">read full guide</a>
+      </p>
       <PaymentElement />
     </section>
 
