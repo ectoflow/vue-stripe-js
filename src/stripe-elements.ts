@@ -1,6 +1,5 @@
 import type {
   Stripe,
-  // Element options
   StripeAddressElementOptions,
   StripeAffirmMessageElementOptions,
   StripeAfterpayClearpayMessageElementOptions,
@@ -10,6 +9,7 @@ import type {
   StripeCardExpiryElementOptions,
   StripeCardNumberElementOptions,
   StripeConstructorOptions,
+  StripeCurrencySelectorElement,
   StripeElement,
   StripeElementType,
   StripeElements,
@@ -26,6 +26,7 @@ import type {
   StripeIssuingCardExpiryDisplayElementOptions,
   StripeIssuingCardNumberDisplayElementOptions,
   StripeIssuingCardPinDisplayElementOptions,
+  StripeLinkAuthenticationElement,
   StripeP24BankElementOptions,
   StripePaymentElementOptions,
   StripePaymentMethodMessagingElementOptions,
@@ -38,24 +39,26 @@ export type StripeElementOptions =
   | StripeAffirmMessageElementOptions
   | StripeAfterpayClearpayMessageElementOptions
   | StripeAuBankAccountElementOptions
-  | StripeCardElementOptions
-  | StripeCardNumberElementOptions
-  | StripeCardExpiryElementOptions
   | StripeCardCvcElementOptions
+  | StripeCardElementOptions
+  | StripeCardExpiryElementOptions
+  | StripeCardNumberElementOptions
+  | StripeCurrencySelectorElement
   | StripeEpsBankElementOptions
+  | StripeExpressCheckoutElementOptions
   | StripeFpxBankElementOptions
   | StripeIbanElementOptions
   | StripeIdealBankElementOptions
+  | StripeIssuingCardCopyButtonElementOptions
+  | StripeIssuingCardCvcDisplayElementOptions
+  | StripeIssuingCardExpiryDisplayElementOptions
+  | StripeIssuingCardNumberDisplayElementOptions
+  | StripeIssuingCardPinDisplayElementOptions
+  | StripeLinkAuthenticationElement
   | StripeP24BankElementOptions
-  | StripeExpressCheckoutElementOptions
   | StripePaymentElementOptions
   | StripePaymentMethodMessagingElementOptions
   | StripePaymentRequestButtonElementOptions
-  | StripeIssuingCardNumberDisplayElementOptions
-  | StripeIssuingCardCvcDisplayElementOptions
-  | StripeIssuingCardExpiryDisplayElementOptions
-  | StripeIssuingCardPinDisplayElementOptions
-  | StripeIssuingCardCopyButtonElementOptions
   | StripeShippingAddressElementOptions
 
 /* type StripeElementOptionsMap = {
@@ -64,26 +67,26 @@ export type StripeElementOptions =
   afterpayClearpayMessage: StripeAfterpayClearpayMessageElementOptions
   auBankAccount: StripeAuBankAccountElementOptions
   card: StripeCardElementOptions
-  cardNumber: StripeCardNumberElementOptions
-  cardExpiry: StripeCardExpiryElementOptions
   cardCvc: StripeCardCvcElementOptions
+  cardExpiry: StripeCardExpiryElementOptions
+  cardNumber: StripeCardNumberElementOptions
   currencySelector: undefined
   epsBank: StripeEpsBankElementOptions
   expressCheckout: StripeExpressCheckoutElementOptions
   fpxBank: StripeFpxBankElementOptions
   iban: StripeIbanElementOptions
   idealBank: StripeIdealBankElementOptions
+  issuingCardCopyButton: StripeIssuingCardCopyButtonElementOptions
+  issuingCardCvcDisplay: StripeIssuingCardCvcDisplayElementOptions
+  issuingCardExpiryDisplay: StripeIssuingCardExpiryDisplayElementOptions
+  issuingCardNumberDisplay: StripeIssuingCardNumberDisplayElementOptions
+  issuingCardPinDisplay: StripeIssuingCardPinDisplayElementOptions
+  linkAuthentication: undefined
   p24Bank: StripeP24BankElementOptions
   payment: StripePaymentElementOptions
   paymentMethodMessaging: StripePaymentMethodMessagingElementOptions
   paymentRequestButton: StripePaymentRequestButtonElementOptions
-  linkAuthentication: undefined
   shippingAddress: StripeShippingAddressElementOptions
-  issuingCardNumberDisplay: StripeIssuingCardNumberDisplayElementOptions
-  issuingCardCvcDisplay: StripeIssuingCardCvcDisplayElementOptions
-  issuingCardExpiryDisplay: StripeIssuingCardExpiryDisplayElementOptions
-  issuingCardPinDisplay: StripeIssuingCardPinDisplayElementOptions
-  issuingCardCopyButton: StripeIssuingCardCopyButtonElementOptions
 } */
 
 export const ERRORS = {
