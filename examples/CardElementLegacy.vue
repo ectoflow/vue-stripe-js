@@ -5,6 +5,7 @@
     :instance-options="instanceOptions"
     :elements-options="elementsOptions"
     ref="elms"
+    class="py-3"
   >
     <StripeElement
       type="card"
@@ -15,8 +16,9 @@
   <button
     type="button"
     @click="pay"
+    class="w-full rounded-b bg-slate-600 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-500"
   >
-    Pay
+    Pay now
   </button>
 </template>
 
