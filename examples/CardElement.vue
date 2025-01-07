@@ -6,6 +6,7 @@
       :instance-options="instanceOptions"
       :elements-options="elementsOptions"
       ref="elementsComponent"
+      class="py-3"
     >
       <StripeElement
         type="card"
@@ -13,7 +14,11 @@
         ref="cardComponent"
       />
     </StripeElements>
-    <button>Pay now</button>
+    <button 
+      class="w-full rounded-b bg-slate-600 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-500"
+    >
+      Pay now
+    </button>
   </form>
 </template>
 
@@ -36,6 +41,10 @@ const elementsOptions = ref<StripeElementsOptions>({
   // https://stripe.com/docs/js/elements_object/create#stripe_elements-options
 })
 const cardOptions = ref<StripeCardElementOptions>({
+  style: {
+    base: {},
+    invalid: {},
+  },
   // https://stripe.com/docs/stripe.js#element-options
 })
 const stripeLoaded = ref(false)
@@ -71,14 +80,5 @@ function handlePay() {
         console.log("Great success!")
       }
     })
-
-  // if (payload.error) {
-  //   setError(`Payment failed ${payload.error.message}`);
-  //   setProcessing(false);
-  // } else {
-  //   setError(null);
-  //   setProcessing(false);
-  //   setSucceeded(true);
-  // }
 }
 </script>
