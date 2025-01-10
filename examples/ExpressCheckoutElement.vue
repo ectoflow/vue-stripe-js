@@ -52,8 +52,8 @@ const expressCheckoutComponent = useTemplateRef("expressCheckoutComponent")
 
 const handleSomething = () => {
   const stripeInstance = elementsComponent.value?.instance
-  const expressCheckout: StripeExpressCheckoutElement =
-    expressCheckoutComponent.value?.stripeElement
+  const expressCheckout = expressCheckoutComponent.value
+    ?.stripeElement as StripeExpressCheckoutElement
 
   // do advanced stuff ...
 }
