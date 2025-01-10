@@ -1,33 +1,58 @@
 import type {
   Stripe,
+  StripeAddressElement,
   StripeAddressElementOptions,
+  StripeAffirmMessageElement,
   StripeAffirmMessageElementOptions,
+  StripeAfterpayClearpayMessageElement,
   StripeAfterpayClearpayMessageElementOptions,
+  StripeAuBankAccountElement,
   StripeAuBankAccountElementOptions,
+  StripeCardCvcElement,
   StripeCardCvcElementOptions,
+  StripeCardElement,
   StripeCardElementOptions,
+  StripeCardExpiryElement,
   StripeCardExpiryElementOptions,
+  StripeCardNumberElement,
   StripeCardNumberElementOptions,
   StripeConstructorOptions,
+  StripeCurrencySelectorElement,
   StripeElementType,
   StripeElements,
   StripeElementsOptions,
   StripeElementsOptionsClientSecret,
   StripeElementsOptionsMode,
+  StripeEpsBankElement,
   StripeEpsBankElementOptions,
+  StripeExpressCheckoutElement,
   StripeExpressCheckoutElementOptions,
+  StripeFpxBankElement,
   StripeFpxBankElementOptions,
+  StripeIbanElement,
   StripeIbanElementOptions,
+  StripeIdealBankElement,
   StripeIdealBankElementOptions,
+  StripeIssuingCardCopyButtonElement,
   StripeIssuingCardCopyButtonElementOptions,
+  StripeIssuingCardCvcDisplayElement,
   StripeIssuingCardCvcDisplayElementOptions,
+  StripeIssuingCardExpiryDisplayElement,
   StripeIssuingCardExpiryDisplayElementOptions,
+  StripeIssuingCardNumberDisplayElement,
   StripeIssuingCardNumberDisplayElementOptions,
+  StripeIssuingCardPinDisplayElement,
   StripeIssuingCardPinDisplayElementOptions,
+  StripeLinkAuthenticationElement,
+  StripeP24BankElement,
   StripeP24BankElementOptions,
+  StripePaymentElement,
   StripePaymentElementOptions,
+  StripePaymentMethodMessagingElement,
   StripePaymentMethodMessagingElementOptions,
+  StripePaymentRequestButtonElement,
   StripePaymentRequestButtonElementOptions,
+  StripeShippingAddressElement,
   StripeShippingAddressElementOptions,
 } from "@stripe/stripe-js"
 
@@ -65,7 +90,7 @@ export type StripeElementOptionsMap = {
   cardCvc: StripeCardCvcElementOptions
   cardExpiry: StripeCardExpiryElementOptions
   cardNumber: StripeCardNumberElementOptions
-  currencySelector: undefined
+  currencySelector?: undefined
   epsBank: StripeEpsBankElementOptions
   expressCheckout: StripeExpressCheckoutElementOptions
   fpxBank: StripeFpxBankElementOptions
@@ -76,12 +101,40 @@ export type StripeElementOptionsMap = {
   issuingCardExpiryDisplay: StripeIssuingCardExpiryDisplayElementOptions
   issuingCardNumberDisplay: StripeIssuingCardNumberDisplayElementOptions
   issuingCardPinDisplay: StripeIssuingCardPinDisplayElementOptions
-  linkAuthentication: undefined
+  linkAuthentication?: undefined
   p24Bank: StripeP24BankElementOptions
   payment: StripePaymentElementOptions
   paymentMethodMessaging: StripePaymentMethodMessagingElementOptions
   paymentRequestButton: StripePaymentRequestButtonElementOptions
   shippingAddress: StripeShippingAddressElementOptions
+}
+
+export type StripeElementMap = {
+  address: StripeAddressElement
+  affirmMessage: StripeAffirmMessageElement
+  afterpayClearpayMessage: StripeAfterpayClearpayMessageElement
+  auBankAccount: StripeAuBankAccountElement
+  card: StripeCardElement
+  cardCvc: StripeCardCvcElement
+  cardExpiry: StripeCardExpiryElement
+  cardNumber: StripeCardNumberElement
+  currencySelector: StripeCurrencySelectorElement
+  epsBank: StripeEpsBankElement
+  expressCheckout: StripeExpressCheckoutElement
+  fpxBank: StripeFpxBankElement
+  iban: StripeIbanElement
+  idealBank: StripeIdealBankElement
+  issuingCardCopyButton: StripeIssuingCardCopyButtonElement
+  issuingCardCvcDisplay: StripeIssuingCardCvcDisplayElement
+  issuingCardExpiryDisplay: StripeIssuingCardExpiryDisplayElement
+  issuingCardNumberDisplay: StripeIssuingCardNumberDisplayElement
+  issuingCardPinDisplay: StripeIssuingCardPinDisplayElement
+  linkAuthentication: StripeLinkAuthenticationElement
+  p24Bank: StripeP24BankElement
+  payment: StripePaymentElement
+  paymentMethodMessaging: StripePaymentMethodMessagingElement
+  paymentRequestButton: StripePaymentRequestButtonElement
+  shippingAddress: StripeShippingAddressElement
 }
 
 export const ERRORS = {
@@ -127,10 +180,15 @@ export const createElements = (
   }
 }
 
-export const createElement = (
+type CreateFn = <T extends StripeElementType>(
+  elementType: T,
+  options?: StripeElementOptionsMap[T],
+) => StripeElementMap[T]
+
+export const createElement = <T extends StripeElementType>(
   elements: StripeElements,
-  elementType: StripeElementType,
-  options?: StripeElementOptionsMap[StripeElementType],
+  elementType: T,
+  options?: StripeElementOptionsMap[T],
 ) => {
   try {
     if (!elements) {
@@ -139,7 +197,10 @@ export const createElement = (
     if (!elementType) {
       throw new Error(ERRORS.ELEMENT_TYPE_NOT_DEFINED)
     }
-    return elements.create(elementType, options)
+    // Type assertion to bypass the overloads issue
+    const create: CreateFn = elements.create.bind(elements) as CreateFn
+    const element = create(elementType, options)
+    return element
   } catch (error) {
     console.error(error)
   }

@@ -7,7 +7,6 @@ import type { StripeElementType, StripeElements } from "@stripe/stripe-js"
 import type { Ref } from "vue"
 import {
   computed,
-  defineEmits,
   inject,
   onBeforeUnmount,
   onMounted,
@@ -15,17 +14,14 @@ import {
   toRefs,
   watch,
 } from "vue"
-import type { StripeElementOptionsMap } from "../stripe-elements"
+import type { StripeElementOptions } from "../stripe-elements"
 import { createElement } from "../stripe-elements"
 
-interface Props {
+const props = defineProps<{
   type?: StripeElementType
   elements?: StripeElements
-  options?: StripeElementOptionsMap[StripeElementType]
-}
-
-const props = defineProps<Props>()
-
+  options?: StripeElementOptions
+}>()
 const emit = defineEmits(eventTypes)
 const { type, elements, options } = toRefs(props)
 
@@ -86,7 +82,8 @@ onBeforeUnmount(() => {
 
 watch(options, () => {
   if (options.value && stripeElement.value && "update" in stripeElement.value) {
-    stripeElement.value.update(options.value)
+    // biome-ignore lint/suspicious/noExplicitAny: update option ts overload is too specific
+    stripeElement.value.update(options.value as any)
   }
 })
 
