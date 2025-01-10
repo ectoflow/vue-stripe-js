@@ -2,11 +2,11 @@
   <form @submit.prevent="handlePay">
     <StripeElements
       v-if="stripeLoaded"
+      class="py-3"
       :stripe-key="publishableKey"
       :instance-options="instanceOptions"
       :elements-options="elementsOptions"
       ref="elementsComponent"
-      class="py-3"
     >
       <StripeElement
         type="card"
@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import { loadStripe } from "@stripe/stripe-js"
 import type {
+  StripeCardElement,
   StripeCardElementOptions,
   StripeConstructorOptions,
   StripeElementsOptions,
@@ -62,7 +63,7 @@ function handlePay() {
   // You need to implement backend for creating PaymentIntent
   // Learn more by reading https://docs.stripe.com/payments/card-element?lang=node
   const stripeInstance = elementsComponent.value?.instance
-  const card = cardComponent.value?.stripeElement
+  const card = cardComponent.value?.stripeElement as StripeCardElement
 
   // Let's skip to the point you got clientSecret
   const clientSecret = "i_was_created_on_server"
