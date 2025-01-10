@@ -1,7 +1,7 @@
 {
   "name": "vue-stripe-js",
   "version": "2.0.0",
-  "description": "Vue 3 components for Stripe.js: Elements & Checkout",
+  "description": "Vue 3 components for Stripe.js",
   "type": "module",
   "main": "./dist/vue-stripe.js",
   "exports": {
@@ -15,7 +15,7 @@
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "check:types": "publint && attw --pack . --ignore-rules=cjs-resolves-to-esm",
-    "ci": "pnpm run build && pnpm run check:types"
+    "ci": "biome check && pnpm run build && pnpm run check:types"
   },
   "files": ["dist"],
   "repository": {
@@ -29,10 +29,12 @@
   "bugs": {
     "url": "https://github.com/ectoflow/vue-stripe-js/issues"
   },
+  "dependencies": {
+    "@stripe/stripe-js": "^5.5.0"
+  },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.2",
     "@biomejs/biome": "1.9.4",
-    "@stripe/stripe-js": "^5.5.0",
     "@tailwindcss/vite": "4.0.0-beta.8",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "0.7.0",

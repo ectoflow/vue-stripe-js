@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@stripe/stripe-js':
+        specifier: ^5.5.0
+        version: 5.5.0
     devDependencies:
       '@arethetypeswrong/cli':
         specifier: ^0.17.2
@@ -14,9 +18,6 @@ importers:
       '@biomejs/biome':
         specifier: 1.9.4
         version: 1.9.4
-      '@stripe/stripe-js':
-        specifier: ^5.5.0
-        version: 5.5.0
       '@tailwindcss/vite':
         specifier: 4.0.0-beta.8
         version: 4.0.0-beta.8(vite@6.0.7(jiti@2.4.2)(lightningcss@1.29.1))
