@@ -9,8 +9,6 @@ import type {
   StripeCardExpiryElementOptions,
   StripeCardNumberElementOptions,
   StripeConstructorOptions,
-  StripeCurrencySelectorElement,
-  StripeElement,
   StripeElementType,
   StripeElements,
   StripeElementsOptions,
@@ -26,7 +24,6 @@ import type {
   StripeIssuingCardExpiryDisplayElementOptions,
   StripeIssuingCardNumberDisplayElementOptions,
   StripeIssuingCardPinDisplayElementOptions,
-  StripeLinkAuthenticationElement,
   StripeP24BankElementOptions,
   StripePaymentElementOptions,
   StripePaymentMethodMessagingElementOptions,
@@ -43,7 +40,6 @@ export type StripeElementOptions =
   | StripeCardElementOptions
   | StripeCardExpiryElementOptions
   | StripeCardNumberElementOptions
-  | StripeCurrencySelectorElement
   | StripeEpsBankElementOptions
   | StripeExpressCheckoutElementOptions
   | StripeFpxBankElementOptions
@@ -54,14 +50,13 @@ export type StripeElementOptions =
   | StripeIssuingCardExpiryDisplayElementOptions
   | StripeIssuingCardNumberDisplayElementOptions
   | StripeIssuingCardPinDisplayElementOptions
-  | StripeLinkAuthenticationElement
   | StripeP24BankElementOptions
   | StripePaymentElementOptions
   | StripePaymentMethodMessagingElementOptions
   | StripePaymentRequestButtonElementOptions
   | StripeShippingAddressElementOptions
 
-/* type StripeElementOptionsMap = {
+export type StripeElementOptionsMap = {
   address: StripeAddressElementOptions
   affirmMessage: StripeAffirmMessageElementOptions
   afterpayClearpayMessage: StripeAfterpayClearpayMessageElementOptions
@@ -87,12 +82,13 @@ export type StripeElementOptions =
   paymentMethodMessaging: StripePaymentMethodMessagingElementOptions
   paymentRequestButton: StripePaymentRequestButtonElementOptions
   shippingAddress: StripeShippingAddressElementOptions
-} */
+}
 
 export const ERRORS = {
-  STRIPE_NOT_LOADED: "Stripe script is not loaded",
+  STRIPE_NOT_LOADED:
+    "Stripe is not loaded. Include it as script or load using loadStripe method of @stripe/stripe-js",
   INSTANCE_NOT_DEFINED:
-    "Instance object is not defined. Initialize Stripe before creating elements",
+    "Stripe instance is not defined. Initialize Stripe before creating elements",
   ELEMENTS_NOT_DEFINED:
     "Elements object is not defined. You can't create stripe element without it",
   ELEMENT_TYPE_NOT_DEFINED:
@@ -134,8 +130,8 @@ export const createElements = (
 export const createElement = (
   elements: StripeElements,
   elementType: StripeElementType,
-  options?: StripeElementOptions,
-): StripeElement | undefined => {
+  options?: StripeElementOptionsMap[StripeElementType],
+) => {
   try {
     if (!elements) {
       throw new Error(ERRORS.ELEMENTS_NOT_DEFINED)
@@ -143,7 +139,7 @@ export const createElement = (
     if (!elementType) {
       throw new Error(ERRORS.ELEMENT_TYPE_NOT_DEFINED)
     }
-    return elements.create(elementType as any, options as any)
+    return elements.create(elementType, options)
   } catch (error) {
     console.error(error)
   }

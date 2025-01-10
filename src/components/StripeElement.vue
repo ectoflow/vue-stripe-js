@@ -4,7 +4,9 @@
 
 <script setup lang="ts">
 import type { StripeElementType, StripeElements } from "@stripe/stripe-js"
+import type { Ref } from "vue"
 import {
+  computed,
   defineEmits,
   inject,
   onBeforeUnmount,
@@ -12,62 +14,60 @@ import {
   ref,
   toRefs,
   watch,
-  withDefaults,
 } from "vue"
+import type { StripeElementOptionsMap } from "../stripe-elements"
 import { createElement } from "../stripe-elements"
-import type { StripeElementOptions } from "../stripe-elements"
 
 interface Props {
   type?: StripeElementType
   elements?: StripeElements
-  options?: StripeElementOptions
+  options?: StripeElementOptionsMap[StripeElementType]
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  type: () =>
-    (inject("providedElements") as StripeElementType) ? "payment" : "card",
-  elements: () => inject("providedElements") as StripeElements,
-})
+const props = defineProps<Props>()
+
+const emit = defineEmits(eventTypes)
 const { type, elements, options } = toRefs(props)
 
-// TODO: verify it works
-const emit = defineEmits()
+// Backward-compatibility: used when no type is provided. Having elements at this stage means it comes from slot props.
+const fallbackType = computed(() => (elements.value ? "card" : "payment"))
+
+// This dependency is provided by StripeElements.vue
+const providedElements = inject("providedElements") as Ref<StripeElements>
 
 const domElement = ref(document.createElement("div"))
-const stripeElement = ref()
-const mountPoint = ref()
+const stripeElement = ref<ReturnType<typeof createElement>>()
+const mountPoint = ref<HTMLDivElement>()
 
 onMounted(() => {
   const mountElement = () => {
     stripeElement.value = createElement(
-      elements.value,
-      type.value,
+      elements.value || providedElements.value,
+      type.value || fallbackType.value,
       options.value,
     )
-    mountPoint.value.appendChild(domElement.value)
+    mountPoint.value?.appendChild(domElement.value)
     stripeElement.value?.mount(domElement.value)
   }
 
-  // Handle event listeners
-  const wrapperFn = (t: string, e: Event) => {
-    emit(t, e)
-  }
-
   const handleEvents = () => {
-    // See stripe element events: https://stripe.com/docs/js/element/events
-    const eventTypes = [
-      "change",
-      "ready",
-      "focus",
-      "blur",
-      "click",
-      "escape",
-      "loaderror",
-      "loaderstart",
-    ]
+    // Define the interface for the type with the "on" method
+    interface StripeElementWithOn {
+      on(eventType: string, handler: (e: Event) => void): void
+    }
 
-    for (const eventType of eventTypes) {
-      stripeElement.value?.on(eventType, wrapperFn.bind(null, eventType))
+    // Type guard function to check if an object has the "on" method
+    function hasOnMethod(obj: unknown): obj is StripeElementWithOn {
+      return !!obj && typeof (obj as StripeElementWithOn).on === "function"
+    }
+
+    if (stripeElement.value && hasOnMethod(stripeElement.value)) {
+      // See stripe element events: https://stripe.com/docs/js/element/events
+      for (const eventType of eventTypes) {
+        stripeElement.value.on(eventType, (e: Event) => {
+          emit(eventType, e)
+        })
+      }
     }
   }
 
@@ -85,7 +85,9 @@ onBeforeUnmount(() => {
 })
 
 watch(options, () => {
-  stripeElement.value?.update(props.options)
+  if (options.value && stripeElement.value && "update" in stripeElement.value) {
+    stripeElement.value.update(options.value)
+  }
 })
 
 defineExpose({
@@ -93,4 +95,17 @@ defineExpose({
   domElement,
   mountPoint,
 })
+</script>
+
+<script lang="ts">
+export const eventTypes = [
+  "change",
+  "ready",
+  "focus",
+  "blur",
+  "click",
+  "escape",
+  "loaderror",
+  "loaderstart",
+]
 </script>
