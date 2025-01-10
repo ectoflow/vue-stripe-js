@@ -3,7 +3,7 @@
     v-if="stripeLoaded"
     v-slot="{ elements }"
     :stripe-key="stripeKey"
-    :instance-options="instanceOptions"
+    :instance-options="stripeOptions"
     :elements-options="elementsOptions"
     ref="elms"
     class="py-3"
@@ -39,7 +39,7 @@ export default defineComponent({
 
   setup() {
     const stripeKey = ref("pk_test_TYooMQauvdEDq54NiTphI7jx") // test key
-    const instanceOptions = ref({
+    const stripeOptions = ref({
       // https://stripe.com/docs/js/initializing#init_stripe_js-options
     })
     const elementsOptions = ref({
@@ -65,7 +65,7 @@ export default defineComponent({
     return {
       stripeKey,
       stripeLoaded,
-      instanceOptions,
+      stripeOptions,
       elementsOptions,
       cardOptions,
       card,

@@ -2,7 +2,7 @@
   <StripeElements
     v-if="stripeLoaded"
     :stripe-key="publishableKey"
-    :instance-options="instanceOptions"
+    :instance-options="stripeOptions"
     :elements-options="elementsOptions"
     ref="elementsComponent"
   >
@@ -27,7 +27,7 @@ import StripeElement from "../src/components/StripeElement.vue"
 import StripeElements from "../src/components/StripeElements.vue"
 
 const publishableKey = ref("pk_test_f3duw0VsAEM2TJFMtWQ90QAT") // test key
-const instanceOptions = ref<StripeConstructorOptions>({
+const stripeOptions = ref<StripeConstructorOptions>({
   // https://stripe.com/docs/js/initializing#init_stripe_js-options
 })
 const elementsOptions = ref<StripeElementsOptions>({
