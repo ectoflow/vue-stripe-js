@@ -1,6 +1,7 @@
 <template>
   <StripeElements
     v-if="stripeLoaded"
+    v-slot="{ elements }"
     :stripe-key="stripeKey"
     :instance-options="instanceOptions"
     :elements-options="elementsOptions"
@@ -8,7 +9,7 @@
     class="py-3"
   >
     <StripeElement
-      type="card"
+      :elements="elements"
       :options="cardOptions"
       ref="card"
     />
