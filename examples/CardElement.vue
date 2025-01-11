@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import { loadStripe } from "@stripe/stripe-js"
 import type {
+  Stripe,
   StripeCardElement,
   StripeCardElementOptions,
   StripeConstructorOptions,
@@ -52,23 +53,24 @@ const stripeLoaded = ref(false)
 
 const elementsComponent = useTemplateRef("elementsComponent")
 const cardComponent = useTemplateRef("cardComponent")
+const stripe = ref<Stripe | null>(null)
 
-onBeforeMount(() => {
-  loadStripe(publishableKey.value).then(() => {
-    stripeLoaded.value = true
-  })
+onBeforeMount(async () => {
+  stripe.value = await loadStripe(publishableKey.value)
+  stripeLoaded.value = true
 })
 
 function handlePay() {
   // You need to implement backend for creating PaymentIntent
   // Learn more by reading https://docs.stripe.com/payments/card-element?lang=node
-  const stripeInstance = elementsComponent.value?.instance
   const card = cardComponent.value?.stripeElement as StripeCardElement
+  // You can also access stripe instance from the component
+  const stripeInstance = elementsComponent.value?.instance // same as stripe.value
 
   // Let's skip to the point you got clientSecret
   const clientSecret = "i_was_created_on_server"
 
-  stripeInstance
+  stripe.value
     ?.confirmCardPayment(clientSecret, {
       payment_method: {
         card,
