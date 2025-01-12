@@ -1,5 +1,4 @@
 # Vue Stripe.js
-### [**Become a sponsor** 💜](https://github.com/sponsors/softbeehive)
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ectoflow/vue-stripe-js/ci.yml?branch=main)](https://github.com/ectoflow/vue-stripe-js/actions)
 [![npm](https://img.shields.io/npm/v/vue-stripe-js)](https://www.npmjs.com/package/vue-stripe-js)
@@ -9,7 +8,13 @@
 
 Vue 3 components for Stripe. Build advanced payment integrations quickly. Easy to start, friendly DX, minimal abstractions, and full control. It's a glue between Stripe.js and Vue component lifecycle.
 
+### [**Become a sponsor** 💜](https://github.com/sponsors/softbeehive)
+Consider supporting efforts to make this project healthy and sustainable. Thank you!
+
 ## Quickstart ⚡️
+
+• [**Upgrade guide**](docs/UPGRADE_V1_TO_V2.md)   
+• [**Docs v1**](https://github.com/ectoflow/vue-stripe-js/tree/v1.0.4)
 
 ### 1. Install
 
@@ -164,7 +169,7 @@ All features of Stripe.js are available in two components. The benefits of Vue s
 
 🥇 **Most important property is type** 🥇
 
-```vue
+```html
 <StripeElements>
   <StripeElement type="payment" />
 </StripeElements>
@@ -221,7 +226,7 @@ Following events are emitted on StripeElement
 
 ## Styling
 
-Apply classes to components
+Add classes to components
 
 ```html
 <StripeElements class="border">
