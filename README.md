@@ -9,7 +9,7 @@
 
 Vue 3 components for Stripe. Build advanced payment integrations quickly. Easy to start, friendly DX, minimal abstractions, and full control. It's a glue between Stripe.js and Vue component lifecycle.
 
-# Quickstart
+## Quickstart ⚡️
 
 ### 1. Install
 
@@ -21,8 +21,8 @@ npm i vue-stripe-js @stripe/stripe-js
 
 ```vue
 <script setup lang="ts">
-import { loadStripe } from "@stripe/stripe-js"
 import { onBeforeMount, ref } from "vue"
+import { loadStripe } from "@stripe/stripe-js"
 import type { Stripe } from "@stripe/stripe-js"
 
 const publishableKey = ref('')
@@ -34,7 +34,7 @@ onBeforeMount(async() => {
 </script>
 ```
 
-Alternatively, include a script tag. Make sure Stripe.js is loaded before you mount vue components.
+Alternatively, include a script tag. Make sure Stripe.js is loaded before you mount Vue components.
 
 ```html
 <script src="https://js.stripe.com/v3/"></script>
@@ -42,12 +42,15 @@ Alternatively, include a script tag. Make sure Stripe.js is loaded before you mo
 
 ### 3. Payment Element
 
-This example is based on – [deferred payment guide](https://docs.stripe.com/payments/accept-a-payment-deferred?type=payment)
+Based on – [deferred payment guide](https://docs.stripe.com/payments/accept-a-payment-deferred?type=payment)
+
 ```vue
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form
+    v-if="stripeLoaded"
+    @submit.prevent="handleSubmit"
+  >
     <StripeElements
-      v-if="stripeLoaded"
       :stripe-key="stripeKey"
       :instance-options="stripeOptions"
       :elements-options="elementsOptions"
@@ -68,10 +71,9 @@ This example is based on – [deferred payment guide](https://docs.stripe.com/pa
 </template>
 
 <script setup lang="ts">
-import StripeElements from "vue-stripe-js"
-import StripeElement from "vue-stripe-js"
-import { loadStripe } from "@stripe/stripe-js"
 import { onBeforeMount, ref, useTemplateRef } from "vue"
+import { loadStripe } from "@stripe/stripe-js"
+import { StripeElements, StripeElement } from "vue-stripe-js"
 
 import type {
   StripeElementsOptionsMode,
@@ -86,13 +88,13 @@ const elementsOptions = ref<StripeElementsOptionsMode>({
   // https://stripe.com/docs/js/elements_object/create#stripe_elements-options
   mode: "payment",
   amount: 1099,
-  currency: "eur",
+  currency: "usd",
   appearance: {
     theme: "flat",
   },
 })
 const paymentElementOptions = ref<StripePaymentElementOptions>({
-  // https://stripe.com/docs/stripe.js#element-options
+  // https://docs.stripe.com/js/elements_object/create_payment_element#payment_element_create-options
 })
 const stripeLoaded = ref(false)
 const clientSecret = ref("")
@@ -141,37 +143,64 @@ async function handleSubmit() {
 
 ```
 
-### 4. Payment element (requires backend)
+## Examples 🌿
 
-1. Add server code by following
-   [stripe guide](https://docs.stripe.com/payments/quickstart?lang=node)
-1. Grab `clientSecret` from the payment intent
-1. Pass it to `elements-options`
+Thanks to the Provider Pattern used in Stripe Elements, you get minimalist tools with full access to Stripe.js methods and properties. This results in better developer experience (DX), simpler code, and fewer bugs.
+
+These examples use Vue Composition API and TypeScript.
+
+- [All](examples/)
+- [Payment](examples/PaymentElementDeferred.vue)
+- [Card](examples/CardElement.vue)
+- [Express Checkout](examples/ExpressCheckoutElement.vue)
+
+#### Screenshot
+
+![Vue Stripe.js demo screenshot](examples/demo/demo_screenshort.png)
+
+## Advanced integration 🏗️
+
+All features of Stripe.js are available in two components. The benefits of Vue solution: element is created and destroyed automatically, options are reactive, event listeners are attached to StripeElement. Simple and future-proof.
+
+🥇 **Most important property is type** 🥇
 
 ```vue
-<template>
-  <StripeElements
-    ...
-    :elements-options="elementsOptions"
-  >
-    <StripeElement
-      type="payment"
-      ...
-    />
-  </StripeElements>
-<template />
+<StripeElements>
+  <StripeElement type="payment" />
+</StripeElements>
 ```
 
+Available types
 ```ts
-const elementsOptions = ref({
-  clientSecret: "grab_it_from_payment_intent",
-  // https://stripe.com/docs/js/elements_object/create#stripe_elements-options
-})
+type StripeElementType =
+  | 'address'
+  | 'affirmMessage'
+  | 'afterpayClearpayMessage'
+  | 'auBankAccount'
+  | 'card'
+  | 'cardNumber'
+  | 'cardExpiry'
+  | 'cardCvc'
+  | 'currencySelector'
+  | 'epsBank'
+  | 'expressCheckout'
+  | 'fpxBank'
+  | 'iban'
+  | 'idealBank'
+  | 'p24Bank'
+  | 'payment'
+  | 'paymentMethodMessaging'
+  | 'paymentRequestButton'
+  | 'linkAuthentication'
+  | 'shippingAddress'
+  | 'issuingCardNumberDisplay'
+  | 'issuingCardCvcDisplay'
+  | 'issuingCardExpiryDisplay'
+  | 'issuingCardPinDisplay'
+  | 'issuingCardCopyButton'
+
+// Check actual element types in @stripe/stripe-js
 ```
-
-#### It works!
-
-<img width="840" alt="image" src="https://github.com/user-attachments/assets/0619f7b5-a70f-48a1-84c4-c75bf9fc6ded" />
 
 ## Events
 
@@ -186,9 +215,31 @@ Following events are emitted on StripeElement
 - blur
 - click
 - escape
-- 
+- loaderror
+- loaderstart
 
-## Style elements
 
-No base style included. Main reason: overriding it isn't fun. Style as you wish
-via element options: [see details](https://stripe.com/docs/js/appendix/style).
+## Styling
+
+Apply classes to components
+
+```vue
+<StripeElements class="border">
+  <StripeElement class="p-4" type="card" :options="cardOptions" />
+</StripeElements>
+```
+
+Style element via options - [read documentation](https://stripe.com/docs/js/appendix/style)
+
+```ts
+const cardOptions = ref<StripeCardElementOptions>({
+  style: {
+    base: {
+      iconColor: "green",
+    },
+    invalid: {
+      iconColor: "red",
+    },
+  },
+})
+```
