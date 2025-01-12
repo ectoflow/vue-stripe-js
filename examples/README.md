@@ -4,18 +4,18 @@ Full power of Stripe.js + beauty of Vue. Build advanced payment integrations qui
 
 ## Demo 
 
-### 1. Clone
+**1. Clone**
 ```bash
 git clone git@github.com:ectoflow/vue-stripe-js.git
 ```
 
-### 2. Install
+**2. Install**
 
 ```bash
 npm install
 ```
 
-### 3. Run demo
+**3. Run demo**
 ```bash
 npm run dev
 ```

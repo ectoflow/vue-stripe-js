@@ -37,7 +37,7 @@ const elementsOptions = ref<StripeElementsOptions>({
   currency: "eur",
 })
 const expressCheckoutOptions = ref<StripeExpressCheckoutElementOptions>({
-  // https://stripe.com/docs/stripe.js#element-options
+  // https://docs.stripe.com/js/elements_object/create_express_checkout_element#express_checkout_element_create-options
 })
 const stripeLoaded = ref(false)
 

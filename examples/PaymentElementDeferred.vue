@@ -52,7 +52,7 @@ const elementsOptions = ref<StripeElementsOptionsMode>({
   },
 })
 const paymentElementOptions = ref<StripePaymentElementOptions>({
-  // https://stripe.com/docs/stripe.js#element-options
+  // https://docs.stripe.com/js/elements_object/create_payment_element#payment_element_create-options
 })
 const stripeLoaded = ref(false)
 const clientSecret = ref("")
