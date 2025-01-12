@@ -43,11 +43,11 @@ const elementsOptions = ref<StripeElementsOptions>({
   // https://stripe.com/docs/js/elements_object/create#stripe_elements-options
 })
 const cardOptions = ref<StripeCardElementOptions>({
+  // https://docs.stripe.com/js/elements_object/create_element?type=card#elements_create-options
   style: {
     base: {},
     invalid: {},
   },
-  // https://stripe.com/docs/stripe.js#element-options
 })
 const stripeLoaded = ref(false)
 
