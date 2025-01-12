@@ -154,7 +154,7 @@ These examples use Vue Composition API and TypeScript.
 - [Card](examples/CardElement.vue)
 - [Express Checkout](examples/ExpressCheckoutElement.vue)
 
-#### Screenshot
+### Screenshot
 
 ![Vue Stripe.js demo screenshot](examples/demo/demo_screenshort.png)
 
@@ -204,7 +204,7 @@ type StripeElementType =
 
 ## Events
 
-```vue
+```html
 <StripeElement @blur="doSomething" />
 ```
 Following events are emitted on StripeElement
@@ -223,7 +223,7 @@ Following events are emitted on StripeElement
 
 Apply classes to components
 
-```vue
+```html
 <StripeElements class="border">
   <StripeElement class="p-4" type="card" :options="cardOptions" />
 </StripeElements>
