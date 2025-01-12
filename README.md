@@ -13,6 +13,7 @@ Consider supporting efforts to make this project healthy and sustainable. Thank 
 
 ## Quickstart ⚡️
 
+### Upgrade
 • [**Upgrade guide**](docs/UPGRADE_V1_TO_V2.md)   
 • **[Docs v1](https://github.com/ectoflow/vue-stripe-js/tree/v1.0.4)**
 
@@ -150,7 +151,7 @@ async function handleSubmit() {
 
 ## Examples 🌿
 
-Thanks to the Provider Pattern used in Stripe Elements, you get minimalist tools with full access to Stripe.js methods and properties. This results in better developer experience (DX), simpler code, and fewer bugs.
+Thanks to the Provider Pattern used in StripeElements, you get minimalist tools with full access to Stripe.js methods and properties. This results in better developer experience (DX), simpler code, and fewer bugs.
 
 These examples use Vue Composition API and TypeScript.
 
