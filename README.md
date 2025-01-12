@@ -14,7 +14,7 @@ Consider supporting efforts to make this project healthy and sustainable. Thank 
 ## Quickstart ⚡️
 
 • [**Upgrade guide**](docs/UPGRADE_V1_TO_V2.md)   
-• [**Docs v1**](https://github.com/ectoflow/vue-stripe-js/tree/v1.0.4)
+• **[Docs v1](https://github.com/ectoflow/vue-stripe-js/tree/v1.0.4)**
 
 ### 1. Install
 
