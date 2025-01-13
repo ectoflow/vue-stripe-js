@@ -51,6 +51,7 @@ const cardOptions = ref<StripeCardElementOptions>({
 })
 const stripeLoaded = ref(false)
 
+// Vue 3.5 and newer, for older vue versions use ref()
 const elementsComponent = useTemplateRef("elementsComponent")
 const cardComponent = useTemplateRef("cardComponent")
 const stripe = ref<Stripe | null>(null)

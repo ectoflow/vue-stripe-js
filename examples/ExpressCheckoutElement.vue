@@ -47,6 +47,7 @@ onBeforeMount(() => {
   })
 })
 
+// Vue 3.5 and newer, for older vue versions use ref()
 const elementsComponent = useTemplateRef("elementsComponent")
 const expressCheckoutComponent = useTemplateRef("expressCheckoutComponent")
 
