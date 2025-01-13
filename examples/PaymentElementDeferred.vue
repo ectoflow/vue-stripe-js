@@ -57,7 +57,7 @@ const paymentElementOptions = ref<StripePaymentElementOptions>({
 const stripeLoaded = ref(false)
 const clientSecret = ref("")
 
-// Define component refs
+// Vue 3.5 and newer, for older vue versions use ref()
 const elementsComponent = useTemplateRef("elementsComponent")
 const paymentComponent = useTemplateRef("paymentComponent")
 
