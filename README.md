@@ -77,7 +77,7 @@ Based on – [deferred payment guide](https://docs.stripe.com/payments/accept-a-
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, ref, useTemplateRef } from "vue"
+import { onBeforeMount, ref } from "vue"
 import { loadStripe } from "@stripe/stripe-js"
 import { StripeElements, StripeElement } from "vue-stripe-js"
 
@@ -106,8 +106,8 @@ const stripeLoaded = ref(false)
 const clientSecret = ref("")
 
 // Define component refs
-const elementsComponent = useTemplateRef("elementsComponent")
-const paymentComponent = useTemplateRef("paymentComponent")
+const elementsComponent = ref()
+const paymentComponent = ref()
 
 onBeforeMount(() => {
   loadStripe(stripeKey.value).then(() => {
