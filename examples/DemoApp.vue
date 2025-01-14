@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-y-12 container px-6 py-10 max-w-xl">
+  <div class="flex flex-col gap-y-12 container p-10 max-w-2xl mx-auto">
     <h1 class="text-3xl font-semibold">Demo Vue Stripe.js</h1>
 
     <section>
@@ -13,6 +13,8 @@
       <PaymentElementDeferred />
     </section>
 
+    <hr class="border-gray-300">
+
     <section>
       <h2 class="text-2xl font-semibold">Card Element</h2>
       <p class="pt-1 pb-4">More recent example. Stripe recommends using Payment Element instead of the Card - 
@@ -24,12 +26,16 @@
       <CardElement />
     </section>
 
+    <hr class="border-gray-300">
+
     <section>
       <h2 class="text-2xl font-semibold">Card Element (Legacy)</h2>
       <p class="pt-1 pb-4">How we implemented card payments a few years ago.</p>
       <CardElementLegacy />
     </section>
 
+    <hr class="border-gray-300">
+    
     <section>
       <h2 class="text-2xl font-semibold">Express Checkout Element</h2>
       <p class="pt-1 pb-4">Use your publishable key and enable relevant payment methods, e.g. PayPal - 
