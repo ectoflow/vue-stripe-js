@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col gap-y-12 container p-10 max-w-2xl mx-auto">
+  <div class="flex flex-col gap-y-10 container p-10 max-w-2xl mx-auto">
     <h1 class="text-3xl font-semibold">Demo Vue Stripe.js</h1>
-
+    
     <section>
       <h2 class="text-2xl font-semibold">Payment Element</h2>
       <p class="pt-1 pb-6">Deferred flow -
@@ -45,6 +45,12 @@
         >read stripe guide</a>
       </p>
       <ExpressCheckoutElement />
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold">Built with</h2>
+      <a class="text-blue-700 hover:underline"
+      href="https://github.com/ectoflow/vue-stripe-js">https://github.com/ectoflow/vue-stripe-js</a>
     </section>
   </div>
 </template>
