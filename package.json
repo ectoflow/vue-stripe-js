@@ -14,6 +14,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
+    "build:demo": "vite --config vite.demo.config.ts build",
     "check:types": "publint && attw --pack . --ignore-rules=cjs-resolves-to-esm",
     "ci": "biome check && pnpm run build && pnpm run check:types"
   },
