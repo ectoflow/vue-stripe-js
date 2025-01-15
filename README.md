@@ -6,16 +6,21 @@
 [![npm](https://img.shields.io/npm/dm/vue-stripe-js)](https://www.npmjs.com/package/vue-stripe-js)
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://vshymanskyy.github.io/StandWithUkraine)
 
-Vue 3 components for Stripe. Build advanced payment integrations quickly. Easy to start, friendly DX, minimal abstractions, and full control. It's a glue between Stripe.js and Vue component lifecycle.
+Vue 3 components for Stripe. Build advanced payment integrations quickly. Easy to start, friendly DX, minimal abstractions, and full control. It's a glue between Stripe.js and Vue component lifecycle. Works with Nuxt 3.
 
-### [**Become a sponsor** 💜](https://github.com/sponsors/softbeehive)
+🟢 **[Live demo](https://vue-stripe-js.netlify.app/)**
+
+## Health 💜
 Consider supporting efforts to make this project healthy and sustainable. Thank you!
+
+- **[Become a sponsor](https://github.com/sponsors/softbeehive)**
+- **[Donate via PayPal](https://paypal.me/softbeehive)**
 
 ## Quickstart ⚡️
 
 ### Upgrade
-• [**Upgrade guide**](docs/UPGRADE_V1_TO_V2.md)   
-• **[Docs v1](https://github.com/ectoflow/vue-stripe-js/tree/v1.0.4)**
+- **[Upgrade guide](docs/UPGRADE_V1_TO_V2.md)**   
+- **[Docs v1](https://github.com/ectoflow/vue-stripe-js/tree/v1.0.4)**
 
 ### 1. Install
 
