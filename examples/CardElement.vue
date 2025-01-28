@@ -34,7 +34,7 @@ import { onBeforeMount, ref, useTemplateRef } from "vue"
 import StripeElement from "../src/components/StripeElement.vue"
 import StripeElements from "../src/components/StripeElements.vue"
 
-const publishableKey = ref("pk_test_TYooMQauvdEDq54NiTphI7jx") // test key
+const publishableKey = "pk_test_TYooMQauvdEDq54NiTphI7jx" // test key
 const stripeOptions = ref<StripeConstructorOptions>({
   // https://stripe.com/docs/js/initializing#init_stripe_js-options
 })
@@ -56,7 +56,7 @@ const cardComponent = useTemplateRef("cardComponent")
 const stripe = ref<Stripe | null>(null)
 
 onBeforeMount(async () => {
-  stripe.value = await loadStripe(publishableKey.value)
+  stripe.value = await loadStripe(publishableKey)
   stripeLoaded.value = true
 })
 

@@ -26,7 +26,7 @@ import { onBeforeMount, ref, useTemplateRef } from "vue"
 import StripeElement from "../src/components/StripeElement.vue"
 import StripeElements from "../src/components/StripeElements.vue"
 
-const publishableKey = ref("pk_test_f3duw0VsAEM2TJFMtWQ90QAT") // test key
+const publishableKey = "pk_test_f3duw0VsAEM2TJFMtWQ90QAT" // test key
 const stripeOptions = ref<StripeConstructorOptions>({
   // https://stripe.com/docs/js/initializing#init_stripe_js-options
 })
@@ -42,7 +42,7 @@ const expressCheckoutOptions = ref<StripeExpressCheckoutElementOptions>({
 const stripeLoaded = ref(false)
 
 onBeforeMount(() => {
-  loadStripe(publishableKey.value).then(() => {
+  loadStripe(publishableKey).then(() => {
     stripeLoaded.value = true
   })
 })
