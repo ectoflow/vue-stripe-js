@@ -33,14 +33,13 @@ npm i vue-stripe-js @stripe/stripe-js
 ```vue
 <script setup lang="ts">
 import { onBeforeMount, ref } from "vue"
-import { loadStripe } from "@stripe/stripe-js"
-import type { Stripe } from "@stripe/stripe-js"
+import { loadStripe, type Stripe } from "@stripe/stripe-js"
 
-const publishableKey = ref('')
+const publishableKey = '' // use your publishable key
 const stripe = ref<Stripe | null>(null)
 
 onBeforeMount(async() => {
-  stripe.value = await loadStripe(publishableKey.value)
+  stripe.value = await loadStripe(publishableKey)
 })
 </script>
 ```
@@ -91,7 +90,7 @@ import type {
   StripePaymentElementOptions,
 } from "@stripe/stripe-js"
 
-const stripeKey = ref("pk_test_f3duw0VsAEM2TJFMtWQ90QAT")
+const stripeKey = "pk_test_f3duw0VsAEM2TJFMtWQ90QAT" // use your publishable key
 const stripeOptions = ref({
   // https://stripe.com/docs/js/initializing#init_stripe_js-options
 })
@@ -115,7 +114,7 @@ const elementsComponent = ref()
 const paymentComponent = ref()
 
 onBeforeMount(() => {
-  loadStripe(stripeKey.value).then(() => {
+  loadStripe(stripeKey).then(() => {
     stripeLoaded.value = true
 
     // Good place to call your backend to create PaymentIntent
