@@ -37,7 +37,7 @@ import { onBeforeMount, ref, useTemplateRef } from "vue"
 import StripeElement from "../src/components/StripeElement.vue"
 import StripeElements from "../src/components/StripeElements.vue"
 
-const stripeKey = ref("pk_test_f3duw0VsAEM2TJFMtWQ90QAT")
+const stripeKey = "pk_test_f3duw0VsAEM2TJFMtWQ90QAT"
 const stripeOptions = ref({
   // https://stripe.com/docs/js/initializing#init_stripe_js-options
 })
@@ -61,7 +61,7 @@ const elementsComponent = useTemplateRef("elementsComponent")
 const paymentComponent = useTemplateRef("paymentComponent")
 
 onBeforeMount(() => {
-  loadStripe(stripeKey.value).then(() => {
+  loadStripe(stripeKey).then(() => {
     stripeLoaded.value = true
 
     // Good place to call your backend to create PaymentIntent

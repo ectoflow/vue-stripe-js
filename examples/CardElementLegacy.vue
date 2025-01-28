@@ -38,7 +38,7 @@ export default defineComponent({
   },
 
   setup() {
-    const stripeKey = ref("pk_test_TYooMQauvdEDq54NiTphI7jx") // test key
+    const stripeKey = "pk_test_TYooMQauvdEDq54NiTphI7jx" // test key
     const stripeOptions = ref({
       // https://stripe.com/docs/js/initializing#init_stripe_js-options
     })
@@ -56,7 +56,7 @@ export default defineComponent({
     const elms = ref()
 
     onBeforeMount(() => {
-      const stripePromise = loadStripe(stripeKey.value)
+      const stripePromise = loadStripe(stripeKey)
       stripePromise.then(() => {
         stripeLoaded.value = true
       })
