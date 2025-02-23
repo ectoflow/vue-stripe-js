@@ -6,20 +6,24 @@
 [![npm](https://img.shields.io/npm/dm/vue-stripe-js)](https://www.npmjs.com/package/vue-stripe-js)
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://vshymanskyy.github.io/StandWithUkraine)
 
-Vue 3 components for Stripe. Build advanced payment integrations quickly. Easy to start, friendly DX, minimal abstractions, and full control. It's a glue between Stripe.js and Vue component lifecycle. Works with Nuxt 3.
+Vue 3 components for Stripe. Build advanced payment integrations quickly. Easy
+to start, friendly DX, minimal abstractions, and full control. It's a glue
+between Stripe.js and Vue component lifecycle. Works with Nuxt 3.
 
 🟢 **[Live demo](https://vue-stripe-js.netlify.app/)**
 
 ## Health 💜
-Consider supporting efforts to make this project healthy and sustainable. Thank you!
 
-- **[Become a sponsor](https://github.com/sponsors/softbeehive)**
+Consider supporting efforts to make this project healthy and sustainable. Thank
+you!
+
 - **[Donate via PayPal](https://paypal.me/softbeehive)**
 
 ## Quickstart ⚡️
 
 ### Upgrade
-- **[Upgrade guide](docs/UPGRADE_V1_TO_V2.md)**   
+
+- **[Upgrade guide](docs/UPGRADE_V1_TO_V2.md)**
 - **[Docs v1](https://github.com/ectoflow/vue-stripe-js/tree/v1.0.4)**
 
 ### 1. Install
@@ -44,7 +48,8 @@ onBeforeMount(async() => {
 </script>
 ```
 
-Alternatively, include a script tag. Make sure Stripe.js is loaded before you mount Vue components.
+Alternatively, include a script tag. Make sure Stripe.js is loaded before you
+mount Vue components.
 
 ```html
 <script src="https://js.stripe.com/v3/"></script>
@@ -52,7 +57,8 @@ Alternatively, include a script tag. Make sure Stripe.js is loaded before you mo
 
 ### 3. Payment Element
 
-Based on – [deferred payment guide](https://docs.stripe.com/payments/accept-a-payment-deferred?type=payment)
+Based on –
+[deferred payment guide](https://docs.stripe.com/payments/accept-a-payment-deferred?type=payment)
 
 ```vue
 <template>
@@ -150,12 +156,13 @@ async function handleSubmit() {
   }
 }
 </script>
-
 ```
 
 ## Examples 🌿
 
-Thanks to the Provider Pattern used in StripeElements, you get minimalist tools with full access to Stripe.js methods and properties. This results in better developer experience (DX), simpler code, and fewer bugs.
+Thanks to the Provider Pattern used in StripeElements, you get minimalist tools
+with full access to Stripe.js methods and properties. This results in better
+developer experience (DX), simpler code, and fewer bugs.
 
 These examples use Vue Composition API and TypeScript.
 
@@ -170,7 +177,9 @@ These examples use Vue Composition API and TypeScript.
 
 ## Advanced integration 🏗️
 
-All features of Stripe.js are available in two components. The benefits of Vue solution: element is created and destroyed automatically, options are reactive, event listeners are attached to StripeElement. Simple and future-proof.
+All features of Stripe.js are available in two components. The benefits of Vue
+solution: element is created and destroyed automatically, options are reactive,
+event listeners are attached to StripeElement. Simple and future-proof.
 
 🥇 **Most important property is type** 🥇
 
@@ -181,33 +190,34 @@ All features of Stripe.js are available in two components. The benefits of Vue s
 ```
 
 Available types
+
 ```ts
 type StripeElementType =
-  | 'address'
-  | 'affirmMessage'
-  | 'afterpayClearpayMessage'
-  | 'auBankAccount'
-  | 'card'
-  | 'cardNumber'
-  | 'cardExpiry'
-  | 'cardCvc'
-  | 'currencySelector'
-  | 'epsBank'
-  | 'expressCheckout'
-  | 'fpxBank'
-  | 'iban'
-  | 'idealBank'
-  | 'p24Bank'
-  | 'payment'
-  | 'paymentMethodMessaging'
-  | 'paymentRequestButton'
-  | 'linkAuthentication'
-  | 'shippingAddress'
-  | 'issuingCardNumberDisplay'
-  | 'issuingCardCvcDisplay'
-  | 'issuingCardExpiryDisplay'
-  | 'issuingCardPinDisplay'
-  | 'issuingCardCopyButton'
+  | "address"
+  | "affirmMessage"
+  | "afterpayClearpayMessage"
+  | "auBankAccount"
+  | "card"
+  | "cardNumber"
+  | "cardExpiry"
+  | "cardCvc"
+  | "currencySelector"
+  | "epsBank"
+  | "expressCheckout"
+  | "fpxBank"
+  | "iban"
+  | "idealBank"
+  | "p24Bank"
+  | "payment"
+  | "paymentMethodMessaging"
+  | "paymentRequestButton"
+  | "linkAuthentication"
+  | "shippingAddress"
+  | "issuingCardNumberDisplay"
+  | "issuingCardCvcDisplay"
+  | "issuingCardExpiryDisplay"
+  | "issuingCardPinDisplay"
+  | "issuingCardCopyButton";
 
 // Check actual element types in @stripe/stripe-js
 ```
@@ -217,6 +227,7 @@ type StripeElementType =
 ```html
 <StripeElement @blur="doSomething" />
 ```
+
 Following events are emitted on StripeElement
 
 - change
@@ -228,7 +239,6 @@ Following events are emitted on StripeElement
 - loaderror
 - loaderstart
 
-
 ## Styling
 
 Add classes to components
@@ -239,7 +249,8 @@ Add classes to components
 </StripeElements>
 ```
 
-Style element via options - [read documentation](https://stripe.com/docs/js/appendix/style)
+Style element via options -
+[read documentation](https://stripe.com/docs/js/appendix/style)
 
 ```ts
 const cardOptions = ref<StripeCardElementOptions>({
@@ -251,5 +262,5 @@ const cardOptions = ref<StripeCardElementOptions>({
       iconColor: "red",
     },
   },
-})
+});
 ```
