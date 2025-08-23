@@ -2,8 +2,7 @@
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ectoflow/vue-stripe-js/ci.yml?branch=main)](https://github.com/ectoflow/vue-stripe-js/actions)
 [![npm](https://img.shields.io/npm/v/vue-stripe-js)](https://www.npmjs.com/package/vue-stripe-js)
-[![Bundle Size](https://img.shields.io/bundlephobia/min/vue-stripe-js)](https://bundlephobia.com/result?p=vue-stripe-js)
-[![npm](https://img.shields.io/npm/dm/vue-stripe-js)](https://www.npmjs.com/package/vue-stripe-js)
+[![npm monthly downloads](https://img.shields.io/npm/dm/vue-stripe-js)](https://www.npmjs.com/package/vue-stripe-js)
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://vshymanskyy.github.io/StandWithUkraine)
 
 Vue 3 components for Stripe. Build advanced payment integrations quickly. Easy
