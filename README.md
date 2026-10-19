@@ -1,22 +1,9 @@
-# Vue Stripe.js
+# ⚠️ Deprecated ⚠️
 
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ectoflow/vue-stripe-js/ci.yml?branch=main)](https://github.com/ectoflow/vue-stripe-js/actions)
-[![npm](https://img.shields.io/npm/v/vue-stripe-js)](https://www.npmjs.com/package/vue-stripe-js)
-[![npm monthly downloads](https://img.shields.io/npm/dm/vue-stripe-js)](https://www.npmjs.com/package/vue-stripe-js)
-[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://vshymanskyy.github.io/StandWithUkraine)
-
-Vue 3 components for Stripe. Build advanced payment integrations quickly. Easy
-to start, friendly DX, minimal abstractions, and full control. It's a glue
-between Stripe.js and Vue component lifecycle. Works with Nuxt 3.
+I stopped maintaining Vue Stripe.js due to unsustainable funding situation. Its npm package vue-stripe-js is deprecated and will not receive any updates.
 
 🟢 **[Live demo](https://vue-stripe-js.netlify.app/)**
 
-## Health 💜
-
-Consider supporting efforts to make this project healthy and sustainable. Thank
-you!
-
-- **[Donate via PayPal](https://paypal.me/softbeehive)**
 
 ## Quickstart ⚡️
 
